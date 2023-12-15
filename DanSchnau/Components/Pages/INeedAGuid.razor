@@ -1,0 +1,71 @@
+﻿@page "/INeedAGuid"
+@page "/home/INeedAGuid"
+
+<PageTitle>I Need A GUID, generate me a GUID</PageTitle>
+
+<div class="container shadow-lg bg-light">
+    <h1>
+        I Need A GUID!
+    </h1>
+    <p>
+        Click to copy; this guid is generated on each page refresh.
+    </p>
+
+    <div class="px-4 py-5 my-5 text-center">
+        <button type="button"
+                onclick="navigator.clipboard.writeText('@guid'); new bootstrap.Toast(document.querySelector(' #liveToast')).show();"
+                style="padding: .75rem 1.25rem; font-size: 2.5rem; border-radius: .8rem;"
+            class="btn btn-primary display-5 fw-bold">
+            <span> <code class="text-light">@guid</code> </span>
+            <p></p>
+        </button>
+    </div>
+
+    <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body"> GUID Copied to Clipboard </div>
+        </div>
+    </div>
+
+    <h2>
+        Why "I Need A GUID?"
+    </h2>
+    <p>
+        Sometimes, when I'm working, I need to generate a GUID. I typically look for a web page do it for me. This GUID is generated with the C# command <code>Guid.NewGuid()</code>.
+    </p>
+
+    <h2>
+        What is a GUID?
+    </h2>
+    <p>
+        GUID stands for "<b>G</b>lobally <b>U</b>nique <b>ID</b>entifier" and is a randomly generated 128-bit value. The button above represents the guid as 32 hexadecimal values, each of which using four bits. Hexadecimal values range from 0 to F, with A-F representing 10 through 15.
+    </p>
+    <p>
+        They are also referred to as "<b>UUID</b>", with the first U for <b>U</b>niversal. Typically in Microsoft tech we use the term "GUID" rather than "UUID", but they mean the same thing.
+    </p>
+    <h2>
+        Why not use an integer for an ID?
+    </h2>
+    <p>
+        In systems with any amount of distribution, sequential IDs may cause a problem where the same ID is generated twice by two different processes, causing a collision of data identifiers. That can mean a user sees data they shouldn't see or can't use their data at all.
+    </p>
+    <p>
+        GUIDs are generated with 128 bits so that the chance of a collision is about <em>one in a billion</em>. A collision of GUIDs is far less likely than winning the lottery, which is already miniscule.
+    </p>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span>"I Need A GUID" last updated September 21, 2023.</span>
+        <a href="/">Go to the Home Page.</a>
+    </footer>
+
+</div>
+
+
+@code {
+    private Guid guid { get; set; }
+
+    public INeedAGuid()
+    {
+        this.guid = Guid.NewGuid();
+    }
+}

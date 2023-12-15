@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@using DanSchnau.Entities
+@model IEnumerable<Blog>
+
+
+<div class="container shadow-lg bg-light">
+    <div class="row">
+        <div class="col-md-7">
+            @{
+                await Html.RenderPartialAsync("BlogIndex", new BlogIndexModel() { Blogs = Model });
+            }
+        </div>
+        <div class="col-md-5">
+                <div class="w-100 my-3">
+                <img class="rounded-start" src="https://danschnaudotcom-images-cdf9eudmcea0hcgx.z01.azurefd.net/danschnaudotcom-images/selfie_compressed.jpg" alt="selfie of me, Dan Schnau" />
+                </div>
+                <p>I'm Dan Schnau. This is my homepage. I've been working with software since 2011. I focus on .NET and Web technologies.</p>
+            <h2 class="text-secondary">Mini-Projects</h2>
+            <p>A collection of little things I've put together.</p>
+            <ul>
+                <li> @Html.ActionLink("I Need a GUID!", "INeedAGuid")</li>
+                <li> @Html.ActionLink("Focus on your breath.", "Breathe")</li>
+                <li> <a href="https://yinzhere.azurewebsites.net/readycheck">"YinzHere"</a></li>
+                <li> @Html.ActionLink("Dan Quits Vaping.", "QuitVaping")</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span>Home Page last updated December 24, 2022.</span>
+        <span>Copyright @@@System.DateTime.Now.Year Dan Schnau</span>
+    </footer>
+</div>

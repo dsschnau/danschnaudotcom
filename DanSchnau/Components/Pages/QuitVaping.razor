@@ -1,0 +1,40 @@
+﻿@page "/Home/QuitVaping"
+@page "/QuitVaping"
+@page "/DanQuitsVaping"
+
+<PageTitle>Dan Quits Vaping</PageTitle>
+
+<div class="container shadow-lg bg-light">
+    <h1>Dan Quits Vaping</h1>
+    <p>I haven't smoked a cigarette or used a vape pen for @daysSince days. This number is generated on page-reload, so it is always up to date.</p>
+    <h2>My Timeline</h2>
+    <ul>
+        <li><strong>June 2021</strong>: I began taking Wellbutrin as part of my antidepressants regimen. Wellbutrin is also prescribed for smoking cessation. Since this month, I've taken in no nicotine to speak of, lozenges or not.</li>
+        <li><strong>May 2021</strong>: still no smoking or vaping. I use 4-16mg of nicotine lozenges daily.</li>
+        <li><strong>February of 2020 </strong>I began experiencing shortness of breath and trouble sleeping, clearly caused by vaping. I began a new quit attempt February 15, 2020. I'm using Nicotine Patches and Lozenges as Nicotine Replacement Therapy. I enrolled in the <a href="https://michigan.quitlogix.org/en-US/">State of Michigan's Quitlink program</a>. In this program, I received coaching, free-of-cost nicotine replacement therapy products, and a support system for breaking my nicotine dependency.</li>
+        <li>I began a new quit attempt on <strong>October 07, 2019.</strong> It lasted about 30 days.</li>
+        <li>I stopped vaping from <strong>December 19, 2018 to June 8, 2019,</strong> for a total of 171 days.</li>
+        <li><strong>In February of 2017,</strong> I tried a vape pen for the first time. I have never smoked a cigarette or cigar since.</li>
+        <li>
+            <strong>In the fall of 2016,</strong> I tried quitting. I bought a package of nicotine gum.
+            I inadvertenly gave himself a nicotine overdose.
+            I was sick for about a week.
+        </li>
+        <li><strong>2005</strong>: When I was 17, I began smoking because I thought it was cool. It turned out to just be addictive.</li>
+    </ul>
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span>"Dan quits Vaping" last updated September 21, 2023.</span>
+        <a href="/">Go to the Home Page.</a>
+    </footer>
+</div>
+
+@code {
+    public DateTime Origin = new DateTime(2020, 02, 15);
+    public int daysSince { get; set; }
+
+    protected override void OnInitialized()
+    {
+        daysSince = (int)((DateTime.Now - Origin).TotalDays);
+        base.OnInitialized();
+    }
+}

@@ -1,0 +1,57 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <ApplicationInsightsResourceId>/subscriptions/e5921a72-68f8-4801-ac48-c015e66de80b/resourcegroups/DanSchnau/providers/microsoft.insights/components/DanSchnauDotCom</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/e5921a72-68f8-4801-ac48-c015e66de80b/resourcegroups/DanSchnau/providers/microsoft.insights/components/DanSchnauDotCom</ApplicationInsightsAnnotationResourceId>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\fonts\**" />
+    <Content Remove="wwwroot\fonts\**" />
+    <EmbeddedResource Remove="wwwroot\fonts\**" />
+    <None Remove="wwwroot\fonts\**" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="GraphQL" Version="7.6.1" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="7.6.1" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="7.6.0" />
+    <PackageReference Include="GraphQL.Server.Ui.Playground" Version="7.6.0" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="7.6.1" />
+    <PackageReference Include="MarkDig" Version="0.33.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.21.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureAD.UI" Version="6.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="1.25.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="7.0.9" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\DanSchnau.Engine\DanSchnau.Engine.csproj" />
+    <ProjectReference Include="..\DanSchnau.Entities\DanSchnau.Entities.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\css\lib\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Components\Layout\MainLayout.razor" />
+    <None Include="Components\Pages\Error.razor" />
+    <None Include="Components\Pages\Home.razor" />
+  </ItemGroup>
+
+</Project>

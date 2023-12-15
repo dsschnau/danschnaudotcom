@@ -1,0 +1,31 @@
+@using DanSchnau.Entities
+
+@model Blog
+
+
+<div class="container shadow-lg bg-light">
+    @{
+        await Html.RenderPartialAsync("_AdminNav");
+    }
+    <div class="row">
+        <h1>Edit Post</h1>
+        <form asp-controller="Admin" asp-action="EditPost" method="post">
+            <div>
+                <label for="PostTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="PostTitle" name="Title" value="@Model.Title" />
+            </div>
+            <div>
+                <label for="PostSlug" class="form-label">Slug</label>
+                <input type="text" class="form-control" id="PostSlug" name="Slug" value="@Model.Slug" />
+            </div>
+
+            <div>
+                <label for="PostContent" class="form-label">Content</label>
+                <textarea class="form-control" id="PostContent" name="Markdown" rows="30">@Model.Markdown</textarea>
+            </div>
+
+            <input type="hidden" name="BlogId" value="@Model.BlogId" />
+            <button type="submit" class="btn btn-primary my-3">Apply Edits</button>
+        </form>
+    </div>
+</div>

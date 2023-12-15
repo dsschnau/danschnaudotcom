@@ -1,0 +1,54 @@
+﻿@page "/Home/Breathe"
+@page "/breathe"
+
+<PageTitle>Breathe.</PageTitle>
+
+<div class="container shadow-lg bg-light">
+    <h1>Breathe.</h1>
+    <p>I have been dabbling with the <a href="https://www.calm.com/">Calm app</a>. The meditation practices have been beneficial for me.</p>
+    <p>I created this page to focus on a breathing pattern while working or waiting.</p>
+
+    <hr />
+
+    <h2>Focus.</h2>
+    <p>Rest your focus on your breath. Breathe in for four seconds, hold for four, out for four, hold for four.</p>
+    <div class="linear-breathing"></div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span>"Breathe." last updated December 24, 2022.</span>
+        <a href="/">Go to the Home Page.</a>
+    </footer>
+
+
+    <style>
+        .linear-breathing {
+            height: 8rem;
+            margin-bottom: 2rem;
+            background-color: deepskyblue;
+            animation: 8s ease-in-out 0s infinite alternate linear-breathing;
+        }
+
+        @@keyframes linear-breathing {
+            0% {
+                width: 5%;
+            }
+
+            25% {
+                width: 5%;
+            }
+
+            75% {
+                width: 95%;
+            }
+
+            100% {
+                width: 95%;
+            }
+        }
+    </style>
+</div>
+
+
+@code {
+
+}

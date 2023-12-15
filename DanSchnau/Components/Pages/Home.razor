@@ -1,0 +1,50 @@
+﻿@page "/"
+@page "/home/index"
+
+@using DanSchnau.Entities
+
+<PageTitle>Home Page</PageTitle>
+
+<div class="container shadow-lg bg-light">
+    <div class="row">
+        <div class="col-md-7">
+            @foreach (var group in GroupedByYearDescending)
+            {
+                <section>
+                    <h2 class="text-secondary">@group.Key</h2>
+
+                    <ol reversed>
+                        @foreach (var blog in group)
+                        {
+                            <li style="list-style: decimal">
+                                <a class="text-primary" href="/blog/@blog.Slug">@blog.Title</a>
+                            </li>
+                        }
+                    </ol>
+                </section>
+            }
+        </div>
+        <div class="col-md-5">
+            <div class="w-100 my-3">
+                <img class="rounded-start" src="https://danschnaudotcom-images-cdf9eudmcea0hcgx.z01.azurefd.net/danschnaudotcom-images/selfie_compressed.jpg" alt="selfie of me, Dan Schnau" />
+            </div>
+            <p>I'm Dan Schnau. This is my homepage. I've been working with software since 2011. I focus on .NET and Web technologies.</p>
+            <h2 class="text-secondary">Mini-Projects</h2>
+            <p>A collection of little things I've put together.</p>
+            <ul>
+                <li><a href="/INeedAGuid">I Need a GUID!</a></li>
+                <li><a href="/Breathe">Focus on your breath.</a></li>
+                <li><a href="https://yinzhere.azurewebsites.net/readycheck">"YinzHere"</a></li>
+                <li><a href="/QuitVaping">Dan Quits Vaping.</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span>Home Page last updated December 11, 2023.</span>
+        <span>Copyright @@@System.DateTime.Now.Year Dan Schnau</span>
+    </footer>
+</div>
+
+
+

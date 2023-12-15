@@ -1,0 +1,58 @@
+﻿@page "/blog/{Slug}"
+@using DanSchnau.Engine
+
+
+<div class="container shadow-lg bg-light">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@Blog?.Title</h1>
+            @((MarkupString)Blog?.Content)
+        </div>
+    </div>
+
+    @{
+        var lastUpdated = Blog != null && Blog.LastUpdated.HasValue ?
+        $" and last updated {@Blog.LastUpdated.Value.ToShortDateString()}."
+        : ".";
+    }
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span><span class="fst-italic">"@Blog?.Title"</span> first published @Blog?.Published.ToShortDateString()@lastUpdated</span>
+        <a href="/">Go to the Home Page.</a>
+    </footer>
+    <footer class="fs-6 text-center my-5 pt-5">
+        <small><b>Dan Schnau </b>is an app developer building an app dev company with skills in: </small>
+        <ul class="list-inline text-center">
+            <li class="list-inline-item"><small>dotnet</small></li>
+            <li class="list-inline-item"><small>c sharp</small></li>
+            <li class="list-inline-item"><small>app dev software</small></li>
+            <li class="list-inline-item"><small>net 6 hosting</small></li>
+            <li class="list-inline-item"><small>net 7 hosting</small></li>
+            <li class="list-inline-item"><small>net 8 hosting</small></li>
+            <li class="list-inline-item"><small>learn sql</small></li>
+            <li class="list-inline-item"><small>SQL Data analytics</small></li>
+            <li class="list-inline-item"><small>SQL 2019</small></li>
+            <li class="list-inline-item"><small>SQL 2022</small></li>
+            <li class="list-inline-item"><small>dev applications</small></li>
+            <li class="list-inline-item"><small>seo optimization ;)</small></li>
+        </ul>
+
+    </footer>
+</div>
+
+@code {
+
+    [Parameter]
+    public string Slug { get; set; }
+
+    [Inject]
+    public BlogRepo BlogRepo { get; set; }
+
+    public Entities.Blog Blog{ get; set; }
+
+    protected async override Task OnParametersSetAsync()
+    {
+        this.Blog = await BlogRepo.GetBlogBySlugAsync(this.Slug);
+        await base.OnParametersSetAsync();
+    }
+}

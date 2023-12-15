@@ -1,0 +1,54 @@
+@using DanSchnau.Entities
+
+@model Blog
+
+<div class="container shadow-lg bg-light">
+@if (Model == null)
+{
+    await Html.RenderPartialAsync("_AdminNav");
+    <div class="row">
+
+    </div>
+
+    <form asp-controller="Admin" asp-action="PreviewMarkdownPost" method="post" class="p-3">
+        <div> <label class="form-label">Title:</label> <input type="text" class="form-control" name="title" required> </div>
+        <div> <label class="form-label">Slug (lowecase, alphanumeric and underscores):</label> <input type="text" class="form-control" name="slug" required> </div>
+
+        <div> <span>Link to Azure Storage: <a href="https://portal.azure.com/#view/Microsoft_Azure_Storage/ContainerMenuBlade/~/overview/storageAccountId/%2Fsubscriptions%2Fe5921a72-68f8-4801-ac48-c015e66de80b%2FresourceGroups%2FDanSchnau%2Fproviders%2FMicrosoft.Storage%2FstorageAccounts%2Fdanschnaustorage/path/danschnaudotcom-images/etag/%220x8DBB3B17F014A11%22/defaultEncryptionScope/%24account-encryption-key/denyEncryptionScopeOverride~/false/defaultId//publicAccessVal/Blob">danschnaudotcom-images</a></span></div>
+        <div> <span>FrontDoor image url: <pre>https://danschnaudotcom-images-cdf9eudmcea0hcgx.z01.azurefd.net/danschnaudotcom-images/{your-file-here}</pre></span></div>
+
+        <div> <label class="form-label">Content:</label><textarea class="form-control" rows="30" name="markdown" id="posteditor"></textarea> </div>
+        <div id="wordcount"></div>
+        <div class="my-3">
+            <input class="btn btn-primary" type="submit" value="Preview Markdown Post, Save as Draft" /> 
+        </div>
+    </form>
+}
+else
+{
+    <h1>Preview Post</h1>
+
+    <form asp-controller="Admin" asp-action="PublishPreview" method="post">
+        <div> <label class="form-label">Title:</label> <input type="text" class="form-control" name="title" value="@Model.Title"> </div>
+        <div> <label class="form-label">Slug:</label> <input type="text" class="form-control "name="slug" value="@Model.Slug"> </div>
+        <input type="hidden" value="@Model.Markdown" name="markdown" />
+        <input type="hidden" value="@Model.BlogId" name="blogid" />
+        <div>
+            @Html.Raw(@Model.Content)
+        </div>
+        <div> <input type="submit" value="POST IT" /> </div>
+    </form>
+}
+</div>
+<script>
+    var editor = document.querySelector('#posteditor');
+    editor.onkeypress = function () {
+        var count = getWordCount();
+        document.querySelector('#wordcount').innerHTML = `Word Count: ${count}`
+    }
+
+    function getWordCount() {
+        const val = editor.value.split(/\s+/).length;
+        return val;
+    }
+</script>

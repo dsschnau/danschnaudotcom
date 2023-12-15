@@ -1,0 +1,69 @@
+﻿@using DanSchnau.Entities
+
+@model IList<Blog>
+
+<div class="container shadow-lg bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="/admin">Post Index</a>
+                    <a class="nav-link" href="/admin/createmarkdownpost">Create Post</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                @foreach (var blog in Model)
+                {
+                    <li class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            @* markup for hidden blog posts *@
+                            @if (blog.Hidden.HasValue && blog.Hidden.Value == true)
+                            {
+                                <a class="btn btn-light" href="/blog/@blog.Slug">@blog.Title <span
+                                        class="badge rounded-pill bg-dark">hidden</span></a>
+
+                                @* post actions *@
+                                <div>
+                                    <form asp-controller="Admin" asp-action="UnHidePost" class="d-inline" method="post">
+                                        <input type="hidden" name="blogId" value="@blog.BlogId" />
+                                        <input type="submit" value="unhide" class="btn btn-secondary" />
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="DeletePost" method="post" class="d-inline"
+                                        onsubmit="return confirm('are you sure? this is not reversible.');">
+                                        <input type="hidden" name="blogId" value="@blog.BlogId" />
+                                        <input type="submit" value="delete" class="btn btn-danger" />
+                                    </form>
+                                </div>
+                            }
+                            @* markup for regular blog posts *@
+                            else
+                            {
+                                <a class="btn btn-light" href="/blog/@blog.Slug">@blog.Title</a>
+                                @* post actions *@
+                                <div>
+                                    <form asp-controller="Admin" asp-action="EditPost" method="get" class="d-inline">
+                                        <input type="hidden" name="blogId" value="@blog.BlogId" />
+                                        <input type="submit" class="btn btn-primary" value="edit" />
+                                    </form>
+                                    <form asp-controller="Admin" asp-action="HidePost" method="post" class="d-inline">
+                                        <input type="hidden" name="blogId" value="@blog.BlogId" />
+                                        <input type="submit" class="btn btn-secondary" value="hide" />
+                                    </form>
+                                </div>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

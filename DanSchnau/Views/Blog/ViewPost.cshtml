@@ -1,0 +1,40 @@
+﻿@using DanSchnau.Entities
+@model DanSchnau.Entities.Blog
+
+<div class="container shadow-lg bg-light">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>@Model.Title</h1>
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+
+    @{
+        var lastUpdated = Model.LastUpdated.HasValue ?
+        $" and last updated {@Model.LastUpdated.Value.ToShortDateString()}."
+        : ".";
+    }
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center border-top py-2">
+        <span><span class="fst-italic">"@Model.Title"</span> first published @Model.Published.ToShortDateString()@lastUpdated</span>
+        <a href="/">Go to the Home Page.</a>
+    </footer>
+    <footer class="fs-6 text-center my-5 pt-5">
+            <small><b>Dan Schnau </b>is an app developer building an app dev company with skills in: </small>
+            <ul class="list-inline text-center">
+                <li class="list-inline-item"><small>dotnet</small></li>
+                <li class="list-inline-item"><small>c sharp</small></li>
+                <li class="list-inline-item"><small>app dev software</small></li>
+                <li class="list-inline-item"><small>net 6 hosting</small></li>
+                <li class="list-inline-item"><small>net 7 hosting</small></li>
+                <li class="list-inline-item"><small>net 8 hosting</small></li>
+                <li class="list-inline-item"><small>learn sql</small></li>
+                <li class="list-inline-item"><small>SQL Data analytics</small></li>
+                <li class="list-inline-item"><small>SQL 2019</small></li>
+                <li class="list-inline-item"><small>SQL 2022</small></li>
+                <li class="list-inline-item"><small>dev applications</small></li>
+                <li class="list-inline-item"><small>seo optimization ;)</small></li>
+            </ul>
+
+    </footer>
+</div>
